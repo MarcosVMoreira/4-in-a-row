@@ -6,5 +6,7 @@
 define('URL_BASE', dirname(__FILE__) . '/');
 
 /** Caminhos dos templates de header e footer **/
-define('HEADER_TEMPLATE', URL_BASE . 'inc/header.php');
-define('FOOTER_TEMPLATE', URL_BASE . 'inc/footer.php');
+define('HEADER_TEMPLATE', URL_BASE . 'inc/header.html');
+define('FOOTER_TEMPLATE', URL_BASE . 'inc/footer.html');
+
+?>
