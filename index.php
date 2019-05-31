@@ -3,6 +3,11 @@
     include(HEADER_TEMPLATE);
 ?>
 
+<!-- stylesheets import start -->
+
+
+
+<!-- stylesheets import start -->
 
 <img src="img/blue.png" id="img00" width="100" height="100"/>
 <img src="img/blue.png" id="img01" width="100" height="100"/>
@@ -22,7 +27,11 @@
 
 <br>
 
+<!-- scripts import start -->
 
+<script src="model/boardModel.js"></script>
+
+<!-- scripts import end -->
 
 <?php
     include(FOOTER_TEMPLATE);

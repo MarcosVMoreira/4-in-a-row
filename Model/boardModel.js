@@ -5,12 +5,15 @@ const blueButton = "img/blue.png";
 
 $(document).ready(function() {
 
-    //changeColor("31", "red");
     //cleanBoard();
+    scorePoint ("AI");
+    scorePoint ("player");
+    scorePoint ("play");
 
 });
 
 //receive image coordinate and color as parameter and change the state of the button
+//usage example: changeColor("31", "red");
 function changeColor (imageCoord, imageColor) {
 
     let fullPath = "img/"+imageColor+".png";
@@ -31,15 +34,19 @@ function cleanBoard () {
 }
 
 //increase score of the given parameter ("AI" or "player"). Return true if sucessfull.
+////usage example: scorePoint ("AI")
 function scorePoint (scorer) {
 
     if (scorer === "AI") {
         //increase AI scoreboard
+        console.log("AI scored a point");
         return true;
     } else if (scorer === "player") {
+        console.log("Player scored a point");
         //increase player scoreboard
         return true;
     } else {
+        console.log("Error on scorePoint method.");
         return false;
     }
 
