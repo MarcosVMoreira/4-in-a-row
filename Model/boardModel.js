@@ -6,9 +6,7 @@ const blueButton = "img/blue.png";
 $(document).ready(function() {
 
     //cleanBoard();
-    scorePoint ("AI");
-    scorePoint ("player");
-    scorePoint ("play");
+    //scorePoint ("AI");
 
 });
 

@@ -27,12 +27,13 @@
 
 <br>
 
+
+<?php
+    include(FOOTER_TEMPLATE);
+?>
+
 <!-- scripts import start -->
 
 <script src="model/boardModel.js"></script>
 
 <!-- scripts import end -->
-
-<?php
-    include(FOOTER_TEMPLATE);
-?>
