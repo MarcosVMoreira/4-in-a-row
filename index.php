@@ -6,7 +6,6 @@
 <!-- stylesheets import start -->
 
 
-
 <!-- stylesheets import start -->
 
 <br><br>
@@ -72,6 +71,8 @@
 
 <!-- scripts import start -->
 
+<script src="controller/stateController.js"></script>
 <script src="model/boardModel.js"></script>
+<script src="main.js"></script>
 
 <!-- scripts import end -->

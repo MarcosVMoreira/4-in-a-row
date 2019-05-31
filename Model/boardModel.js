@@ -1,31 +1,14 @@
-$(document).ready(function() {
-
-    //cleanBoard();
-    //scorePoint ("AI");
-
-});
-
 class BoardModel {
     
     constructor () {
 
-        this.emptyButton = "img/empty.png";
-        this.aiButton = "img/red.png";
-        this.humanButton = "img/blue.png";
-        this.boardWidth = "6";
-        this.boardHeight = "6";
-
-        this.variavel = "teste";
-
     }
     
     //receive image coordinate and color as parameter and change the state of the button
-    //usage example: changeColor("31", "red");
-    changeColor (imageCoord, imageColor) {
+    //usage example: changeColor("31", humanButton);
+    changeColor (imageCoord, imageSource) {
 
-        let fullPath = "img/"+imageColor+".png";
-
-        $("#img"+imageCoord).attr("src", fullPath);
+        $("#img"+imageCoord).attr("src", imageSource);
 
     }
 
@@ -59,6 +42,19 @@ class BoardModel {
 
     }
 
-
-    //fazer funcao que transforma a matriz em jogo visual
+    //sync the visual board with the given matrix
+    updateBoardWithMatrix (matrix) {
+        for (let row = 0; row < boardHeight; row++) {
+            for (let column = 0; column < boardWidth; column++) {
+                let coord = ""+row+column;
+                if (matrix[row][column] == ai) {
+                    this.changeColor(coord, aiButton);
+                } else if (matrix[row][column] == human) {
+                    this.changeColor(coord, humanButton);
+                } else {
+                    this.changeColor(coord, emptyButton);
+                }
+            }
+        } 
+    }
 }
