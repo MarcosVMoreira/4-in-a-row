@@ -23,8 +23,8 @@ function changeColor (imageCoord, imageColor) {
 //clean the board, setting all images to empty
 function cleanBoard () {
 
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
+    for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
             $("#img"+i+j).attr("src", emptyButton);
         }
     }
