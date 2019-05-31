@@ -1,0 +1,14 @@
+body {
+    background-image: url(../img/background.png);
+}
+
+#board {
+    background: url(../img/board.png) no-repeat;
+    width: 90%;
+}
+
+.pieces {
+    position: absolute;
+    top: 31px;
+    left: 380px;
+}
