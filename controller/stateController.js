@@ -1,6 +1,6 @@
 class StateController {
 
-    //6x6 matrix. 0 means empty, 1 means human and 2, AI
+    //6x6 matrix. 0 means empty, 1 means "human" and 2, "AI"
     constructor() {
 
         this.boardMatrix = [
@@ -73,8 +73,6 @@ class StateController {
         }
 
         if (foundEmptySlot) {
-            console.log("Colocando na linha "+emptySlotRow+" e coluna "+column);
-
             this.boardMatrix[emptySlotRow][column] = player;
             return true;
         } 

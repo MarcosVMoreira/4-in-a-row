@@ -16,16 +16,15 @@ $(document).ready(function() {
 
     board = new BoardModel();
 
-    //state.makeMove(2, 2);
+    state.makeMove(2, 2);
 
-    //board.updateBoardWithMatrix(state.getBoardMatrix());
+    board.updateBoardWithMatrix(state.getBoardMatrix());
 
     //state.getBoardMatrix();
 
     state.getChild(ai);
 
-
-    
+    board.updateBoardWithMatrix(state.getChild(ai)[2].getBoardMatrix());
 
     //board.updateBoardWithMatrix(state.getBoardMatrix());
 
