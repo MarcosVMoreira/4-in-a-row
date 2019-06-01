@@ -5,8 +5,11 @@ $(document).ready(function() {
     humanButton = "img/blue.png";
     boardWidth = "6";
     boardHeight = "6";
-    ai = "2";
+    ai = "-1";
     human = "1";
+    empty = "2";
+    noWinner = "-2";
+    draw = "0";
 
     //cleanBoard();
     //scorePoint ("AI");
@@ -24,7 +27,11 @@ $(document).ready(function() {
 
     state.getChild(ai);
 
-    board.updateBoardWithMatrix(state.getChild(ai)[2].getBoardMatrix());
+    board.updateBoardWithMatrix(state.getChild(ai)[1].getBoardMatrix());
+
+    miniMax = new MiniMaxController();
+
+    miniMax.minimax(state);
 
     //board.updateBoardWithMatrix(state.getBoardMatrix());
 

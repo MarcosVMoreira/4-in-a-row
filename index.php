@@ -157,6 +157,7 @@ include(FOOTER_TEMPLATE);
 <!-- scripts import start -->
 
 <script src="controller/stateController.js"></script>
+<script src="controller/miniMaxController.js"></script>
 <script src="model/boardModel.js"></script>
 <script src="main.js"></script>
 

@@ -4,19 +4,23 @@ class StateController {
     constructor() {
 
         this.boardMatrix = [
-            [1,0,0,0,0,0],
-            [1,0,0,2,0,0],
-            [1,0,0,1,0,0],
-            [2,0,0,1,0,0],
-            [2,0,0,1,0,0],
-            [1,1,0,1,2,0]
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2]
         ];
 
         //when the game starts, father start as null
         this.father = null;
 
         //human always do the first move, but the first State is just setted when the AI do one move. 
-        this.minmax = ai;
+        this.minimax = ai;
+
+        this.bestMove = [];
+
+        this.move = [];
     }
 
 
@@ -65,7 +69,7 @@ class StateController {
         var emptySlotRow;
 
         for (let row = (boardHeight-1); row >= 0; row--) {
-            if (this.boardMatrix[row][column] == 0) {
+            if (this.boardMatrix[row][column] == empty) {
                 foundEmptySlot = true;
                 emptySlotRow = row;
                 row = -1;
@@ -92,4 +96,25 @@ class StateController {
 
         return clone;
     }
+
+    getBestMove () {
+        return this.bestMove;
+    }
+
+    setBestMove(i, j) {
+        this.bestMove = [i, j];
+    }
+
+    getMove() {
+        return this.move;
+    }
+
+    findWinner () {
+        //verificar aqui a matriz inteira para ver se há algum ganhador no estado atual
+    }
+
+    setMiniMax(value) {
+        this.minimax = value;
+    }
+
 }
