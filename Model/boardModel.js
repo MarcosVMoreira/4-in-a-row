@@ -48,6 +48,7 @@ class BoardModel {
             for (let column = 0; column < boardWidth; column++) {
                 let coord = ""+row+column;
                 if (matrix[row][column] == ai) {
+                    console.log("Mudando a cor");
                     this.changeColor(coord, aiButton);
                 } else if (matrix[row][column] == human) {
                     this.changeColor(coord, humanButton);

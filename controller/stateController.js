@@ -4,12 +4,12 @@ class StateController {
     constructor() {
 
         this.boardMatrix = [
-            [0,0,0,0,0,0],
-            [1,2,0,0,2,0],
             [1,0,0,0,0,0],
+            [1,0,0,2,0,0],
+            [1,0,0,1,0,0],
             [2,0,0,1,0,0],
-            [2,0,0,0,0,0],
-            [0,1,0,0,2,0]
+            [2,0,0,1,0,0],
+            [1,1,0,1,2,0]
         ];
 
         //when the game starts, father start as null
@@ -19,18 +19,47 @@ class StateController {
         this.minmax = ai;
     }
 
+
+    //return the state board matrix
     getBoardMatrix () {
+        console.log("Matriz: \n"
+        +this.boardMatrix[0][0]+","+this.boardMatrix[0][1]+","+this.boardMatrix[0][2]+","
+        +this.boardMatrix[0][3]+","+this.boardMatrix[0][4]+","+this.boardMatrix[0][5]+
+        "\n"
+        +this.boardMatrix[1][0]+","+this.boardMatrix[1][1]+","+this.boardMatrix[1][2]+","
+        +this.boardMatrix[1][3]+","+this.boardMatrix[1][4]+","+this.boardMatrix[1][5]+
+        "\n"
+        +this.boardMatrix[2][0]+","+this.boardMatrix[2][1]+","+this.boardMatrix[2][2]+","
+        +this.boardMatrix[2][3]+","+this.boardMatrix[2][4]+","+this.boardMatrix[2][5]+
+        "\n"
+        +this.boardMatrix[3][0]+","+this.boardMatrix[3][1]+","+this.boardMatrix[3][2]+","
+        +this.boardMatrix[3][3]+","+this.boardMatrix[3][4]+","+this.boardMatrix[3][5]+
+        "\n"
+        +this.boardMatrix[4][0]+","+this.boardMatrix[4][1]+","+this.boardMatrix[4][2]+","
+        +this.boardMatrix[4][3]+","+this.boardMatrix[4][4]+","+this.boardMatrix[4][5]+
+        "\n"
+        +this.boardMatrix[5][0]+","+this.boardMatrix[5][1]+","+this.boardMatrix[5][2]+","
+        +this.boardMatrix[5][3]+","+this.boardMatrix[5][4]+","+this.boardMatrix[5][5]);        
+
         return this.boardMatrix;
     }
 
+    //generate childs of current state
     getChild (player) {
         var child = [];
 
         for(let column = 0; column < boardWidth; column++) {
-            
+            var newClone = this.cloneState();
+            if (newClone.makeMove(player, column)) {
+                child.push(newClone);
+            }
         }        
+
+        return child;
     }
 
+
+    //check if there is a empty slot in the given column and, if empty, make the move and return true
     makeMove (player, column) {
         var foundEmptySlot = false;
         var emptySlotRow;
@@ -44,37 +73,16 @@ class StateController {
         }
 
         if (foundEmptySlot) {
-            console.log("Encontrei um slot disponíve na row: "+emptySlotRow);
-            //faz a jogada aqui dentro
-            return true;
-        } else {
-            console.log("Coluna lotada! Não é possível realizar mais jogadas.");
-            return false;
-        }
-    }
+            console.log("Colocando na linha "+emptySlotRow+" e coluna "+column);
 
-    /*public boolean realizarJogada(int jogador, int i, int j) {
-        if(casas[i][j] == CASA_VAZIA) {
-            acao = new int[]{i,j};
-            casas[i][j] = jogador;     
+            this.boardMatrix[emptySlotRow][column] = player;
             return true;
-        }
+        } 
+        
         return false;
     }
-    
-    public ArrayList<EstadoJogo> getFilhos(int jogador) {
-        ArrayList<EstadoJogo> filhos = new ArrayList();
-        for(int i = 0; i < 3; ++i) {
-            for(int j =0; j < 3; ++j) {
-                EstadoJogo e = clonar();
-                if(e.realizarJogada(jogador, i, j)) {
-                    filhos.add(e);
-                }
-            }
-        } 
-        return filhos;
-    }
-*/
+
+    //clone the current state and return it
     cloneState () {
         var clone = new StateController;
 

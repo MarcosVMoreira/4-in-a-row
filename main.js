@@ -12,13 +12,22 @@ $(document).ready(function() {
     //scorePoint ("AI");
     state = new StateController();
 
-    state.makeMove(1, 3);
-
     state.getBoardMatrix();
 
     board = new BoardModel();
 
-    board.updateBoardWithMatrix(state.getBoardMatrix());
+    //state.makeMove(2, 2);
+
+    //board.updateBoardWithMatrix(state.getBoardMatrix());
+
+    //state.getBoardMatrix();
+
+    state.getChild(ai);
+
+
+    
+
+    //board.updateBoardWithMatrix(state.getBoardMatrix());
 
     //board.cleanBoard();
 
