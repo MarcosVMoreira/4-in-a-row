@@ -10,6 +10,7 @@ $(document).ready(function() {
     empty = "2";
     noWinner = "-2";
     draw = "0";
+    winCondition = "3";
     currentPlayer = human;
 
     state = new StateController();
@@ -48,7 +49,10 @@ $(document).ready(function() {
 
     //state.makeMove(human, 5);
 
-    var clonedState = state.cloneState();
+    state.findWinner();
+    
+    
+    /*var clonedState = state.cloneState();
 
     var aiMiniMax = new MiniMaxController(clonedState);
 
@@ -63,7 +67,7 @@ $(document).ready(function() {
 
     state.makeMove(currentPlayer, bestMoveForAI[0], bestMoveForAI[1]);
 
-    currentPlayer = human;
+    currentPlayer = human;*/
 
     /*
 

@@ -2,7 +2,7 @@ class MiniMaxController {
 
     constructor(stateParam) {
 
-this.contador=0;
+        this.contador=0;
 
         this.state = stateParam;
     }

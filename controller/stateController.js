@@ -4,12 +4,12 @@ class StateController {
     constructor() {
 
         this.boardMatrix = [
+            [2,1,1,2,2,1],
+            [1,2,1,2,1,1],
+            [2,2,2,2,2,1],
             [2,2,2,2,2,2],
-            [2,2,2,2,2,2],
-            [2,2,2,2,2,2],
-            [2,2,2,2,2,2],
-            [2,2,2,2,2,2],
-            [2,2,2,2,2,2]
+            [1,2,2,2,2,1],
+            [1,2,1,2,1,1]
         ];
 
         //when the game starts, father start as null
@@ -111,6 +111,50 @@ class StateController {
 
     findWinner () {
         //verificar aqui a matriz inteira para ver se há algum ganhador no estado atual
+
+        let winner = false;
+
+        //checking if there is a lineup of three equal buttons in a row
+        for (let row = 0; row < boardHeight; row++) {
+            var counter = 1;
+            let previous = this.boardMatrix[row][0];
+            for (let column = 1; column < boardWidth; column++) {
+                if ((this.boardMatrix[row][column] == previous) &&  this.boardMatrix[row][column] != empty){
+                    counter++;
+                    winner = this.boardMatrix[row][column];
+                } else {
+                    previous = this.boardMatrix[row][column];
+                    if (counter <= winCondition-1) {
+                        counter = 1;
+                    }
+                }
+            }
+            if (counter > winCondition-1) {  
+                console.log("Found a row winner.");
+                return winner;
+            }
+        }
+
+        //checking if there is a lineup of three equal buttons in a column
+        for (let column = 0; column < boardWidth; column++) {
+            var counter = 1;
+            let previous = this.boardMatrix[0][column];
+            for (let row = 1; row < boardHeight; row++) {
+                if ((this.boardMatrix[row][column] == previous) &&  this.boardMatrix[row][column] != empty){
+                    counter++;
+                    winner = this.boardMatrix[row][column];
+                } else {
+                    previous = this.boardMatrix[row][column];
+                    if (counter <= winCondition-1) {
+                        counter = 1;
+                    }
+                }
+            }
+            if (counter > winCondition-1) {  
+                console.log("Found a column winner.");
+                return winner;
+            }
+        }
     }
 
     setMiniMax(value) {
