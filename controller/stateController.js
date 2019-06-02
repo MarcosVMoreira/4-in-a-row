@@ -4,12 +4,12 @@ class StateController {
     constructor() {
 
         this.boardMatrix = [
-            [2,1,1,2,2,1],
-            [1,2,1,2,1,1],
-            [2,2,2,2,2,1],
             [2,2,2,2,2,2],
-            [1,2,2,2,2,1],
-            [1,2,1,2,1,1]
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2]
         ];
 
         //when the game starts, father start as null
@@ -18,32 +18,51 @@ class StateController {
         //human always do the first move, but the first State is just setted when the AI do one move. 
         this.minimax = ai;
 
-        this.bestMove = [];
+        this.bestMove;
 
-        this.move = [];
+        this.move;
     }
 
+    printMatrix () {
+        console.log("Matriz: \n");
+        
+        for (let row = 0; row < boardHeight; row++) {
+            var aux = [];
+            for (let column = 0; column < boardWidth; column++) {
+                if (this.boardMatrix[row][column] != -1) {
+                    var string = " "+this.boardMatrix[row][column];
+                    aux.push(string);
+                } else {
+                    aux.push(this.boardMatrix[row][column]);
+                }
+            }
+            console.log(
+            aux[0]+" "+aux[1]+" "+aux[2]+" "
+            +aux[3]+" "+aux[4]+" "+aux[5]);
+        }
+      /*  console.log("Matriz: \n"
+        +this.boardMatrix[0][0]+" "+this.boardMatrix[0][1]+" "+this.boardMatrix[0][2]+" "
+        +this.boardMatrix[0][3]+" "+this.boardMatrix[0][4]+" "+this.boardMatrix[0][5]+
+        "\n"
+        +this.boardMatrix[1][0]+" "+this.boardMatrix[1][1]+" "+this.boardMatrix[1][2]+" "
+        +this.boardMatrix[1][3]+" "+this.boardMatrix[1][4]+" "+this.boardMatrix[1][5]+
+        "\n"
+        +this.boardMatrix[2][0]+" "+this.boardMatrix[2][1]+" "+this.boardMatrix[2][2]+" "
+        +this.boardMatrix[2][3]+" "+this.boardMatrix[2][4]+" "+this.boardMatrix[2][5]+
+        "\n"
+        +this.boardMatrix[3][0]+" "+this.boardMatrix[3][1]+" "+this.boardMatrix[3][2]+" "
+        +this.boardMatrix[3][3]+" "+this.boardMatrix[3][4]+" "+this.boardMatrix[3][5]+
+        "\n"
+        +this.boardMatrix[4][0]+" "+this.boardMatrix[4][1]+" "+this.boardMatrix[4][2]+" "
+        +this.boardMatrix[4][3]+" "+this.boardMatrix[4][4]+" "+this.boardMatrix[4][5]+
+        "\n"
+        +this.boardMatrix[5][0]+" "+this.boardMatrix[5][1]+" "+this.boardMatrix[5][2]+" "
+        +this.boardMatrix[5][3]+" "+this.boardMatrix[5][4]+" "+this.boardMatrix[5][5]);   */     
+    }
 
     //return the state board matrix
     getBoardMatrix () {
-        console.log("Matriz: \n"
-        +this.boardMatrix[0][0]+","+this.boardMatrix[0][1]+","+this.boardMatrix[0][2]+","
-        +this.boardMatrix[0][3]+","+this.boardMatrix[0][4]+","+this.boardMatrix[0][5]+
-        "\n"
-        +this.boardMatrix[1][0]+","+this.boardMatrix[1][1]+","+this.boardMatrix[1][2]+","
-        +this.boardMatrix[1][3]+","+this.boardMatrix[1][4]+","+this.boardMatrix[1][5]+
-        "\n"
-        +this.boardMatrix[2][0]+","+this.boardMatrix[2][1]+","+this.boardMatrix[2][2]+","
-        +this.boardMatrix[2][3]+","+this.boardMatrix[2][4]+","+this.boardMatrix[2][5]+
-        "\n"
-        +this.boardMatrix[3][0]+","+this.boardMatrix[3][1]+","+this.boardMatrix[3][2]+","
-        +this.boardMatrix[3][3]+","+this.boardMatrix[3][4]+","+this.boardMatrix[3][5]+
-        "\n"
-        +this.boardMatrix[4][0]+","+this.boardMatrix[4][1]+","+this.boardMatrix[4][2]+","
-        +this.boardMatrix[4][3]+","+this.boardMatrix[4][4]+","+this.boardMatrix[4][5]+
-        "\n"
-        +this.boardMatrix[5][0]+","+this.boardMatrix[5][1]+","+this.boardMatrix[5][2]+","
-        +this.boardMatrix[5][3]+","+this.boardMatrix[5][4]+","+this.boardMatrix[5][5]);        
+       
 
         return this.boardMatrix;
     }
@@ -77,6 +96,7 @@ class StateController {
         }
 
         if (foundEmptySlot) {
+            this.move = column;
             this.boardMatrix[emptySlotRow][column] = player;
             return true;
         } 
@@ -101,18 +121,23 @@ class StateController {
         return this.bestMove;
     }
 
-    setBestMove(i, j) {
-        this.bestMove = [i, j];
+    setBestMove(column) {
+        this.bestMove = column;
     }
 
     getMove() {
         return this.move;
     }
 
+    setMove(column) {
+        this.move = column;
+    }
+
     findWinner () {
         //verificar aqui a matriz inteira para ver se há algum ganhador no estado atual
 
-        let winner = false;
+        let winner = noWinner;
+        let winnerRow;
 
         //checking if there is a lineup of three equal buttons in a row
         for (let row = 0; row < boardHeight; row++) {
@@ -122,6 +147,7 @@ class StateController {
                 if ((this.boardMatrix[row][column] == previous) &&  this.boardMatrix[row][column] != empty){
                     counter++;
                     winner = this.boardMatrix[row][column];
+                    winnerRow = row;
                 } else {
                     previous = this.boardMatrix[row][column];
                     if (counter <= winCondition-1) {
@@ -130,7 +156,7 @@ class StateController {
                 }
             }
             if (counter > winCondition-1) {  
-                console.log("Found a row winner.");
+                console.log("Found a row winner: "+winner+" at row: "+winnerRow);
                 return winner;
             }
         }
@@ -151,10 +177,15 @@ class StateController {
                 }
             }
             if (counter > winCondition-1) {  
-                console.log("Found a column winner.");
+                console.log("Found a column winner."+winner);
                 return winner;
             }
         }
+
+        
+
+
+        return noWinner;
     }
 
     setMiniMax(value) {

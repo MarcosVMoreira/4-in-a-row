@@ -43,7 +43,7 @@ $(document).ready(function() {
 
     board.updateBoardWithMatrix(state.getBoardMatrix());
 
-    //board.cleanBoard();*/
+    //board.cleanBoard();
 
     //Início teste MinMax
 
@@ -52,7 +52,7 @@ $(document).ready(function() {
     state.findWinner();
     
     
-    /*var clonedState = state.cloneState();
+    var clonedState = state.cloneState();
 
     var aiMiniMax = new MiniMaxController(clonedState);
 
@@ -67,12 +67,46 @@ $(document).ready(function() {
 
     state.makeMove(currentPlayer, bestMoveForAI[0], bestMoveForAI[1]);
 
-    currentPlayer = human;*/
-
-    /*
+    currentPlayer = human;
 
 
     jogadorAtual = EstadoJogo.JOGADOR_O;
     casas[m[0]][m[1]].setBackground(COR_JOGADOR_X);*/
 
 });
+
+function makeAMove (column) {
+    console.log("Chamei column "+column);
+
+    if (currentPlayer == human) {
+        if (state.makeMove (currentPlayer, column)) {
+
+            //state.printMatrix();
+
+            board.updateBoardWithMatrix (state.getBoardMatrix());
+
+            currentPlayer = ai;
+    
+            var clonedState = state.cloneState();
+    
+            var aiMiniMax = new MiniMaxController(clonedState);
+    
+            var bestMoveForAI = [];
+    
+            bestMoveForAI = aiMiniMax.bestMove();
+
+            var aiColumn = bestMoveForAI[0];
+    
+            state.makeMove(currentPlayer, aiColumn);
+
+            currentPlayer = human;
+
+            state.getBoardMatrix();
+
+            board.updateBoardWithMatrix (state.getBoardMatrix());
+    
+        } else {
+            console.log("Não é possível fazer essa jogada.");
+        }
+    }
+}
