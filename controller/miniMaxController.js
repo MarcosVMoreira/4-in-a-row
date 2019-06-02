@@ -9,8 +9,8 @@ class MiniMaxController {
         return this.minimax(this.state);
     }
 
-    minimax(stateParam) {
-        var bestMove = this.max(stateParam);
+    minimax(stateParamMinimax) {
+        var bestMove = this.max(stateParamMinimax);
         return bestMove.getBestMove();
     }
 

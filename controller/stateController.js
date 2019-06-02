@@ -138,6 +138,7 @@ class StateController {
 
         let winner = noWinner;
         let winnerRow;
+        let drawFindWinner = 36;
 
         //checking if there is a lineup of three equal buttons in a row
         for (let row = 0; row < boardHeight; row++) {
@@ -182,8 +183,17 @@ class StateController {
             }
         }
 
-        
+        for (let row = 0; row < boardHeight; row++) {
+            for (let column = 0; column < boardWidth; column++) {
+                if (this.boardMatrix[row][column] != empty) {
+                    drawFindWinner--;
+                }
+            }
+        }
 
+        if (drawFindWinner == 0) {
+            return draw;
+        }
 
         return noWinner;
     }

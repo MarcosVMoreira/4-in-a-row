@@ -91,11 +91,11 @@ function makeAMove (column) {
     
             var aiMiniMax = new MiniMaxController(clonedState);
     
-            var bestMoveForAI = [];
+            var bestMoveForAI;
     
             bestMoveForAI = aiMiniMax.bestMove();
 
-            var aiColumn = bestMoveForAI[0];
+            var aiColumn = bestMoveForAI;
     
             state.makeMove(currentPlayer, aiColumn);
 
