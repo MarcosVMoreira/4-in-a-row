@@ -117,4 +117,8 @@ class StateController {
         this.minimax = value;
     }
 
+    getMiniMax() {
+        return this.minimax;
+    }
+
 }

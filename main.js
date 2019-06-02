@@ -10,9 +10,16 @@ $(document).ready(function() {
     empty = "2";
     noWinner = "-2";
     draw = "0";
+    currentPlayer = human;
 
-    //cleanBoard();
-    //scorePoint ("AI");
+    state = new StateController();
+    
+    board = new BoardModel();
+
+    board.updateBoardWithMatrix(state.getBoardMatrix());
+
+    /*cleanBoard();
+    scorePoint ("AI");
     state = new StateController();
 
     state.getBoardMatrix();
@@ -33,8 +40,35 @@ $(document).ready(function() {
 
     miniMax.minimax(state);
 
-    //board.updateBoardWithMatrix(state.getBoardMatrix());
+    board.updateBoardWithMatrix(state.getBoardMatrix());
 
-    //board.cleanBoard();
+    //board.cleanBoard();*/
+
+    //Início teste MinMax
+
+    //state.makeMove(human, 5);
+
+    var clonedState = state.cloneState();
+
+    var aiMiniMax = new MiniMaxController(clonedState);
+
+    var bestMoveForAI = [];
+
+    bestMoveForAI = aiMiniMax.bestMove();
+
+    console.log("Best move for the AI: ");
+    console.log(bestMoveForAI[0]);
+
+    currentPlayer = ai;
+
+    state.makeMove(currentPlayer, bestMoveForAI[0], bestMoveForAI[1]);
+
+    currentPlayer = human;
+
+    /*
+
+
+    jogadorAtual = EstadoJogo.JOGADOR_O;
+    casas[m[0]][m[1]].setBackground(COR_JOGADOR_X);*/
 
 });
