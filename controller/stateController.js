@@ -6,10 +6,10 @@ class StateController {
         this.boardMatrix = [
             [2,2,2,2,2,2],
             [2,2,2,2,2,2],
-            [2,2,2,2,2,2],
-            [2,2,2,2,2,2],
-            [2,2,2,2,2,2],
-            [2,2,2,2,2,2]
+            [2,2,2,1,2,2],
+            [2,1,1,2,2,2],
+            [1,2,2,1,2,1],
+            [1,2,1,2,1,2]
         ];
 
         //when the game starts, father start as null
@@ -183,6 +183,65 @@ class StateController {
             }
         }
 
+
+        //diagonal principal esquerda-direita
+        let previous = this.boardMatrix[0][0];
+        counter = 1;
+
+        for (let i = 1; i < boardHeight; i++) {
+            if ((this.boardMatrix[i][i] == previous) &&  this.boardMatrix[i][i] != empty){
+                counter++;
+                winner = this.boardMatrix[i][i];
+            } else {
+                previous = this.boardMatrix[i][i];
+                if (counter <= winCondition-1) {
+                    counter = 1;
+                }
+            }
+        } 
+
+        if (counter > winCondition-1) {  
+            console.log("Found a diagonal winner. "+winner);
+            return winner;
+        }
+
+        //diagonais tamanho 5 esquerda-direita
+        var previous1 = this.boardMatrix[0][1];
+        var previous2 = this.boardMatrix[1][0];
+        var counter1 = 1;
+        var counter2 = 1;
+
+        for (let i = 1; i < boardHeight; i++) {
+            if ((this.boardMatrix[i][i+1] == previous1) &&  this.boardMatrix[i][i+1] != empty){
+                counter1++;
+                winner = this.boardMatrix[i][i+1];
+            } else {
+                previous1 = this.boardMatrix[i][i+1];
+                if (counter1 <= winCondition-1) {
+                    counter1 = 1;
+                }
+            }
+            if (i < 5) {
+                if ((this.boardMatrix[i+1][i] == previous2) &&  this.boardMatrix[i+1][i] != empty){
+                    counter2++;
+                    winner = this.boardMatrix[i+1][i];
+                } else {
+                    previous2 = this.boardMatrix[i+1][i];
+                    if (counter2 <= winCondition-1) {
+                        counter2 = 1;
+                    }
+                }
+            }
+            
+        } 
+
+        if ((counter1 > winCondition-1) || (counter2 > winCondition-1)) {  
+            console.log("Found a diagonal winner. "+winner);
+            return winner;
+        }
+        
+
+
         for (let row = 0; row < boardHeight; row++) {
             for (let column = 0; column < boardWidth; column++) {
                 if (this.boardMatrix[row][column] != empty) {
@@ -192,6 +251,7 @@ class StateController {
         }
 
         if (drawFindWinner == 0) {
+            console.log("Found a draw.");
             return draw;
         }
 

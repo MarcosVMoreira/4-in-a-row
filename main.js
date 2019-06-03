@@ -76,6 +76,9 @@ $(document).ready(function() {
 });
 
 function makeAMove (column) {
+
+    state.findWinner();
+/*
     console.log("Chamei column "+column);
 
     if (currentPlayer == human) {
@@ -108,5 +111,5 @@ function makeAMove (column) {
         } else {
             console.log("Não é possível fazer essa jogada.");
         }
-    }
+    }*/
 }
