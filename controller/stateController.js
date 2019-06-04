@@ -157,7 +157,7 @@ class StateController {
                 }
             }
             if (counter > winCondition-1) {  
-                console.log("Found a row winner: "+winner+" at row: "+winnerRow);
+                //console.log("Found a row winner: "+winner+" at row: "+winnerRow);
                 return winner;
             }
         }
@@ -178,7 +178,7 @@ class StateController {
                 }
             }
             if (counter > winCondition-1) {  
-                console.log("Found a column winner."+winner);
+               // console.log("Found a column winner."+winner);
                 return winner;
             }
         }
@@ -201,7 +201,7 @@ class StateController {
         } 
 
         if (counter > winCondition-1) {  
-            console.log("Found a diagonal winner. "+winner);
+            //console.log("Found a diagonal winner. "+winner);
             return winner;
         }
 
@@ -291,7 +291,7 @@ class StateController {
         if ((counter1 > winCondition-1) || (counter2 > winCondition-1) 
         || (counter3 > winCondition-1)|| (counter4 > winCondition-1)
         || (counter5 > winCondition-1)|| (counter6 > winCondition-1)) {  
-            console.log("Found a diagonal winner. "+winner);
+            //console.log("Found a diagonal winner. "+winner);
             return winner;
         }
 
@@ -315,7 +315,7 @@ class StateController {
             }
         } 
         if (counter > winCondition-1) {  
-            console.log("Found a diagonal winner. "+winner);
+            //console.log("Found a diagonal winner. "+winner);
             return winner;
         }
 
@@ -409,7 +409,7 @@ class StateController {
         if ((counter1 > winCondition-1) || (counter2 > winCondition-1) 
         || (counter3 > winCondition-1)|| (counter4 > winCondition-1)
         || (counter5 > winCondition-1)|| (counter6 > winCondition-1)) {  
-            console.log("Found a diagonal winner. "+winner);
+            //console.log("Found a diagonal winner. "+winner);
             return winner;
         }
         
@@ -423,7 +423,7 @@ class StateController {
         }
 
         if (drawFindWinner == 0) {
-            console.log("Found a draw.");
+            //console.log("Found a draw.");
             return draw;
         }
 
