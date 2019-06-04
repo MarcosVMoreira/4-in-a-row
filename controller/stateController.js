@@ -5,11 +5,11 @@ class StateController {
 
         this.boardMatrix = [
             [2,2,2,2,2,2],
-            [2,2,2,1,1,2],
-            [2,2,2,2,1,1],
-            [1,1,2,2,2,2],
-            [2,2,1,2,2,2],
-            [2,2,1,2,2,2]
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2],
+            [2,2,2,2,2,2]
         ];
 
         //when the game starts, father start as null
@@ -184,7 +184,7 @@ class StateController {
         }
 
 
-        //diagonal principal esquerda-direita
+        //diagonais esquerda-direita
         let previous = this.boardMatrix[0][0];
         counter = 1;
 
@@ -205,7 +205,6 @@ class StateController {
             return winner;
         }
 
-        //diagonais tamanho 5 e 4 esquerda-direita
         var previous1 = this.boardMatrix[0][1];
         var previous2 = this.boardMatrix[1][0];
         var previous3 = this.boardMatrix[0][2];
@@ -282,6 +281,124 @@ class StateController {
                             if (counter6 <= winCondition-1) {
                                 counter6 = 1;
                             }
+                        }
+                    }
+                }
+            }
+
+        } 
+
+        if ((counter1 > winCondition-1) || (counter2 > winCondition-1) 
+        || (counter3 > winCondition-1)|| (counter4 > winCondition-1)
+        || (counter5 > winCondition-1)|| (counter6 > winCondition-1)) {  
+            console.log("Found a diagonal winner. "+winner);
+            return winner;
+        }
+
+
+
+        
+        //diagonais direita-esquerda
+        previous = this.boardMatrix[0][boardWidth-1];
+        counter = 1;
+
+        for (let i = 1; i < boardHeight; i++) {
+            if ((this.boardMatrix[i][boardWidth-i-1] == previous) &&  this.boardMatrix[i][boardWidth-i-1] != empty){
+                counter++;
+                winner = this.boardMatrix[i][boardWidth-i-1];
+
+            } else {
+                previous = this.boardMatrix[i][boardWidth-i-1];
+                if (counter <= winCondition-1) {
+                    counter = 1;
+                }
+            }
+        } 
+        if (counter > winCondition-1) {  
+            console.log("Found a diagonal winner. "+winner);
+            return winner;
+        }
+
+        
+        previous1 = this.boardMatrix[0][4];
+        previous2 = this.boardMatrix[1][5];
+        previous3 = this.boardMatrix[0][3];
+        previous4 = this.boardMatrix[2][5];
+        previous5 = this.boardMatrix[0][2];
+        previous6 = this.boardMatrix[3][5];
+
+        counter1 = 1;
+        counter2 = 1;
+        counter3 = 1;
+        counter4 = 1;
+        counter5 = 1;
+        counter6 = 1;
+
+        for (let i = 1; i < boardHeight; i++) {
+            if ((this.boardMatrix[i][boardHeight-i-2] == previous1) &&  this.boardMatrix[i][boardHeight-i-2] != empty){
+                counter1++;
+                winner = this.boardMatrix[i][boardHeight-i-2];
+            } else {
+                previous1 = this.boardMatrix[i][boardHeight-i-2];
+                if (counter1 <= winCondition-1) {
+                    counter1 = 1;
+                }
+            }
+
+            if (i >= 2) {
+                if ((this.boardMatrix[i][boardHeight-i] == previous2) &&  this.boardMatrix[i][boardHeight-i] != empty){
+                    counter2++;
+                    winner = this.boardMatrix[i][boardHeight-i];
+                } else {
+                    previous2 = this.boardMatrix[i][boardHeight-i];
+                    if (counter2 <= winCondition-1) {
+                        counter2 = 1;
+                    }
+                }
+            }
+
+            if (i >= 3) {
+                if ((this.boardMatrix[i][boardHeight-i+1] == previous4) &&  this.boardMatrix[i][boardHeight-i+1] != empty){
+                    counter4++;
+                    winner = this.boardMatrix[i][boardHeight-i+1];
+                } else {
+                    previous4 = this.boardMatrix[i][boardHeight-i+1];
+                    if (counter4 <= winCondition-1) {
+                        counter4 = 1;
+                    }
+                }
+            }
+
+            if (i >= 4) {
+                if ((this.boardMatrix[i][boardHeight-i+2] == previous6) &&  this.boardMatrix[i][boardHeight-i+2] != empty){
+                    counter6++;
+                    winner = this.boardMatrix[i][boardHeight-i+2];
+                } else {
+                    previous6 = this.boardMatrix[i][boardHeight-i+2];
+                    if (counter6 <= winCondition-1) {
+                        counter6 = 1;
+                    }
+                }
+            }
+
+            if (i < 4) {
+                if ((this.boardMatrix[i][boardHeight-3-i] == previous3) &&  this.boardMatrix[i][boardHeight-3-i] != empty){
+                    counter3++;
+                    winner = this.boardMatrix[i][boardHeight-3-i];
+                } else {
+                    previous3 = this.boardMatrix[i][boardHeight-3-i];
+                    if (counter3 <= winCondition-1) {
+                        counter3 = 1;
+                    }
+                }
+                if (i < 3) {
+                    if ((this.boardMatrix[i][boardHeight-i-4] == previous5) &&  this.boardMatrix[i][boardHeight-i-4] != empty){
+                        counter5++;
+                        winner = this.boardMatrix[i][boardHeight-i-4];
+                    } else {
+                        previous5 = this.boardMatrix[i][boardHeight-i-4];
+                        if (counter5 <= winCondition-1) {
+                            counter5 = 1;
                         }
                     }
                 }
