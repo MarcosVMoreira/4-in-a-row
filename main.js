@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     emptyButton = "img/empty.png";
     aiButton = "img/red.png";
@@ -16,38 +16,38 @@ $(document).ready(function() {
     nivelNaArvore = 0; //variavel de teste
 
     state = new StateController();
-    
+
     board = new BoardModel();
 
     board.updateBoardWithMatrix(state.getBoardMatrix());
 
 });
 
-function makeAMove (column) {
+function makeAMove(column) {
 
     //state.findWinner();
 
-    console.log("Chamei column "+column);
+    console.log("Chamei column " + column);
 
     if (currentPlayer == human) {
-        if (state.makeMove (currentPlayer, column)) {
+        if (state.makeMove(currentPlayer, column)) {
 
             //state.printMatrix();
 
-            board.updateBoardWithMatrix (state.getBoardMatrix());
+            board.updateBoardWithMatrix(state.getBoardMatrix());
 
             currentPlayer = ai;
-    
+
             var clonedState = state.cloneState();
-    
+
             var aiMiniMax = new MiniMaxController(clonedState);
-    
+
             var bestMoveForAI;
-    
+
             bestMoveForAI = aiMiniMax.bestMove();
 
             var aiColumn = bestMoveForAI;
-    
+
             state.makeMove(currentPlayer, aiColumn);
 
             console.log("Fim do algoritmo");
@@ -56,10 +56,9 @@ function makeAMove (column) {
 
             state.getBoardMatrix();
 
-            board.updateBoardWithMatrix (state.getBoardMatrix());
+            board.updateBoardWithMatrix(state.getBoardMatrix());
 
-            
-    
+
         } else {
             console.log("Não é possível fazer essa jogada.");
         }
