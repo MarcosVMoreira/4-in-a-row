@@ -1,40 +1,65 @@
 $(document).ready(function () {
 
+    // Constantes
     emptyButton = "img/empty.png";
     aiButton = "img/red.png";
     humanButton = "img/blue.png";
-    boardWidth = "7";
-    boardHeight = "6";
-    ai = "-1";
-    human = "1";
-    empty = "2";
-    noWinner = "-2";
-    draw = "0";
-    winCondition = "3";
+    boardWidth = 7;
+    boardHeight = 6;
+    ai = 1;
+    human = -1;
+    empty = 0;
+    noWinner = -2;
+    draw = 0;
+    winCondition = 4;
+    aiWon = 100000;
+    humanWon = -100000;
+    difficulty = 1;
+
+    // Variáveis
     currentPlayer = human;
 
-    nivelNaArvore = 0; //variavel de teste
-
+    // Objetos
     state = new StateController();
-
     board = new BoardModel();
 
     board.updateBoardWithMatrix(state.getBoardMatrix());
+    
+    $("#difficultySelect").change(function () {
+        difficulty = this.value;
+        //console.log(this.value);
+        newGame();
+    });
 
 });
 
+function newGame() {
+    setTimeout(function () {
+        state = new StateController();
+        board = new BoardModel();
+        board.updateBoardWithMatrix(state.getBoardMatrix());
+    }, 5000);
+}
+
 function makeAMove(column) {
 
-    //state.findWinner();
-
-    console.log("Chamei column " + column);
+    console.log("Trying to make a move at column: " + column);
 
     if (currentPlayer == human) {
         if (state.makeMove(currentPlayer, column)) {
 
-            //state.printMatrix();
-
             board.updateBoardWithMatrix(state.getBoardMatrix());
+
+            if(state.score() == aiWon) {
+                alert("End game! AI won.");
+                newGame();
+            } else if(state.score() == humanWon) {
+                alert("End game! You won.");
+                newGame();
+            } else if(state.isFull()) {
+                alert("End game! Draw.");
+                newGame();
+            }
 
             currentPlayer = ai;
 
@@ -50,14 +75,22 @@ function makeAMove(column) {
 
             state.makeMove(currentPlayer, aiColumn);
 
-            console.log("Fim do algoritmo");
-
             currentPlayer = human;
 
             state.getBoardMatrix();
 
             board.updateBoardWithMatrix(state.getBoardMatrix());
 
+            if(state.score() == aiWon) {
+                alert("End game! AI won.");
+                newGame();
+            } else if(state.score() == humanWon) {
+                alert("End game! You won.");
+                newGame();
+            } else if(state.isFull()) {
+                alert("End game! Draw.");
+                newGame();
+            }
 
         } else {
             console.log("Não é possível fazer essa jogada.");

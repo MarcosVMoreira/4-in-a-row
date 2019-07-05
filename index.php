@@ -162,6 +162,12 @@ include(HEADER_TEMPLATE);
         </div>
         <div class="col pt-5">
             <img src="img/human.png">
+            <label for="difficultySelect" style="margin-top: 10px; color: white;">Dificuldade</label>
+            <select id="difficultySelect" style="width: 100%;">
+                <option value="1" selected>Fácil</option>
+                <option value="4">Médio</option>
+                <option value="7">Difícil</option>
+            </select>
         </div>
         <div class="col">
         </div>
