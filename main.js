@@ -14,7 +14,7 @@ $(document).ready(function () {
     winCondition = 4;
     aiWon = 100000;
     humanWon = -100000;
-    difficulty = 1;
+    difficulty = 2;
 
     // Variáveis
     currentPlayer = human;
@@ -28,7 +28,9 @@ $(document).ready(function () {
     $("#difficultySelect").change(function () {
         difficulty = this.value;
         //console.log(this.value);
-        newGame();
+        state = new StateController();
+        board = new BoardModel();
+        board.updateBoardWithMatrix(state.getBoardMatrix());
     });
 
 });
