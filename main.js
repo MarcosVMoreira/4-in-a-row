@@ -3,7 +3,7 @@ $(document).ready(function () {
     emptyButton = "img/empty.png";
     aiButton = "img/red.png";
     humanButton = "img/blue.png";
-    boardWidth = "6";
+    boardWidth = "7";
     boardHeight = "6";
     ai = "-1";
     human = "1";
